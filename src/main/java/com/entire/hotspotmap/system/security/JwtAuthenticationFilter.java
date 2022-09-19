@@ -39,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 // 解析token
                 Claims claims = JwtUtil.parseToken(access_token, configProperties.getTokenKey());
-                System.out.println(claims);
                 JwtSubject jwtSubject = JwtUtil.getJwtSubject(claims);
                 User user = userService.getByUsername(jwtSubject.getUsername());
                 if (user == null) {

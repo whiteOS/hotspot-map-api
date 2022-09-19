@@ -69,7 +69,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User getByUsername(String username) {
-        if (username == null) {
+        if (username != null) {
             return null;
         }
         User user = baseMapper.selectByUsername(username);

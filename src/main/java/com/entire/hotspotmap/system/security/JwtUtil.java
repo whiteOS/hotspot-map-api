@@ -7,25 +7,26 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.io.Encoders;
-import io.jsonwebtoken.security.Keys;
-
 import javax.servlet.http.HttpServletRequest;
-import java.security.Key;
 import java.util.Date;
 
+/**
+ * JWT工具类
+ *
+ * @author EleAdmin
+ * @since 2018-01-21 16:30:59
+ */
 public class JwtUtil {
 
     /**
      * 获取请求中的access_token
      *
      * @param request HttpServletRequest
-     * @return String | NULL
+     * @return String
      */
     public static String getAccessToken(HttpServletRequest request) {
         String access_token = request.getHeader(Constants.TOKEN_HEADER_NAME);
-        if (access_token != null && access_token.startsWith(Constants.TOKEN_TYPE)) {
+        if (access_token.startsWith(Constants.TOKEN_TYPE)) {
             access_token = StrUtil.removePrefix(access_token, Constants.TOKEN_TYPE).trim();
         }else {
             access_token = request.getParameter(Constants.TOKEN_PARAM_NAME);
@@ -44,10 +45,10 @@ public class JwtUtil {
     public static String buildToken(JwtSubject subject, Long expire, String key) {
         Date expireDate = new Date(new Date().getTime() + 1000 * expire);
         return Jwts.builder()
-                .setSubject(subject.toString())
+                .setSubject(String.valueOf(subject))
                 .setExpiration(expireDate)
                 .setIssuedAt(new Date())
-                .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(key)))
+                .signWith(SignatureAlgorithm.RS256,key)
                 .compact();
     }
 
@@ -59,9 +60,8 @@ public class JwtUtil {
      * @return Claims
      */
     public static Claims parseToken(String token, String key) {
-        return Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(Decoders.BASE64.decode(key)))
-                .build()
+        return Jwts.parser()
+                .setSigningKey(key)
                 .parseClaimsJws(token)
                 .getBody();
     }
