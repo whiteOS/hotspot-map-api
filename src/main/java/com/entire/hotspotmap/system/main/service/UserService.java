@@ -69,7 +69,7 @@ public interface UserService extends IService<User>, UserDetailsService {
     /**
      * 根据角色查询用户
      *
-     * @param roleId    用户对象ID
+     * @param roleId
      * @return List<User>
      */
     List<User> selectByRoleId(Integer roleId);
