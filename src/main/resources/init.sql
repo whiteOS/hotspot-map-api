@@ -77,7 +77,25 @@ CREATE TABLE menu
 ) COMMENT ='权限菜单表';
 # 示例权限菜单
 INSERT INTO menu
-VALUES (1, 0, '测试菜单', '', '', '0', 0, 'sys.admin', '', '', NOW(), NOW());
+VALUES (1, 0, '用户管理', '', '', '0', 0, 'sys:user:list', '', '', NOW(), NOW());
+INSERT INTO menu(parent_id, title, path, component, menu_type, arrangement, authority, target, icon, create_time, update_time)
+VALUES (0, '菜单管理', '', '', '0', 0, 'sys:menu:list', '', '', NOW(), NOW()),
+(0, '角色管理', '', '', '0', 0, 'sys:role:list', '', '', NOW(), NOW()),
+
+(1, '增加用户', '', '', '0', 0, 'sys:user:save', '', '', NOW(), NOW()),
+(1, '删除用户', '', '', '0', 1, 'sys:user:remove', '', '', NOW(), NOW()),
+(1, '查询用户', '', '', '0', 2, 'sys:user:list', '', '', NOW(), NOW()),
+(1, '修改用户', '', '', '0', 3, 'sys:user:update', '', '', NOW(), NOW()),
+
+(2, '增加菜单', '', '', '0', 0, 'sys:menu:save', '', '', NOW(), NOW()),
+(2, '删除菜单', '', '', '0', 1, 'sys:menu:remove', '', '', NOW(), NOW()),
+(2, '查询菜单', '', '', '0', 2, 'sys:menu:list', '', '', NOW(), NOW()),
+(2, '修改菜单', '', '', '0', 3, 'sys:menu:update', '', '', NOW(), NOW()),
+
+(3, '增加角色', '', '', '0', 0, 'sys:role:save', '', '', NOW(), NOW()),
+(3, '删除角色', '', '', '0', 1, 'sys:role:remove', '', '', NOW(), NOW()),
+(3, '查询角色', '', '', '0', 2, 'sys:role:list', '', '', NOW(), NOW()),
+(3, '修改角色', '', '', '0', 3, 'sys:role:update', '', '', NOW(), NOW());
 COMMIT;
 
 # 角色-菜单表
