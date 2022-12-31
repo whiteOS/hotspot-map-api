@@ -21,8 +21,7 @@ import java.io.IOException;
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e)
-            throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) {
         CommonUtil.responseError(response, Constants.UNAUTHORIZED_CODE, Constants.UNAUTHORIZED_MSG, e.getMessage());
     }
 

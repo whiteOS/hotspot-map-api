@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Date;
 
 @Data
-public class Menu {
+public class Menu implements GrantedAuthority {
     @TableId(type = IdType.AUTO, value = "menu_id")
     private Integer menuId;
 

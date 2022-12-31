@@ -5,14 +5,11 @@ import com.entire.hotspotmap.system.Constants;
 import com.entire.hotspotmap.system.utils.JSONUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Key;
 import java.util.Date;
 
 public class JwtUtil {
@@ -36,15 +33,15 @@ public class JwtUtil {
     /**
      * 生成token
      *
-     * @param subject          载体
+     * @param username          载体
      * @param expire           过期时间
      * @param key              key
      * @return token
      */
-    public static String buildToken(JwtSubject subject, Long expire, String key) {
+    public static String buildToken(String username, Long expire, String key) {
         Date expireDate = new Date(new Date().getTime() + 1000 * expire);
         return Jwts.builder()
-                .setSubject(subject.toString())
+                .setSubject(username)
                 .setExpiration(expireDate)
                 .setIssuedAt(new Date())
                 .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(key)))
@@ -72,7 +69,7 @@ public class JwtUtil {
      * @param claims Claims
      * @return JwtSubject
      */
-    public static JwtSubject getJwtSubject(Claims claims) {
-        return JSONUtil.parseObject(claims.getSubject(), JwtSubject.class);
-    }
+//    public static JwtSubject getJwtSubject(Claims claims) {
+//        return JSONUtil.parseObject(claims.getSubject(), JwtSubject.class);
+//    }
 }

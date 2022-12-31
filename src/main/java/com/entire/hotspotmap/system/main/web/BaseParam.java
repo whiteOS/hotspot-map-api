@@ -32,6 +32,14 @@ public class BaseParam implements Serializable {
     @TableField(exist = false)
     private String createTimeEnd;
 
+    @QueryField(value = "update_time", type = QueryType.GE)
+    @TableField(exist = false)
+    private String updateTimeStart;
+
+    @QueryField(value = "update_time", type = QueryType.LE)
+    @TableField(exist = false)
+    private String updateTimeEnd;
+
     /**
      * 获取集合中的第一条数据
      *

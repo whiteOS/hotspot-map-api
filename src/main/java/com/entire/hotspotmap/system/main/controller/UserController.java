@@ -9,6 +9,8 @@ import com.entire.hotspotmap.system.main.web.BaseController;
 import com.entire.hotspotmap.system.main.web.LoginResult;
 import com.entire.hotspotmap.system.security.JwtSubject;
 import com.entire.hotspotmap.system.security.JwtUtil;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +40,7 @@ public class UserController extends BaseController {
                 return fail("该账号被锁定",null);
             }
         }
-        String access_token = JwtUtil.buildToken(new JwtSubject(username),
+        String access_token = JwtUtil.buildToken(username,
                 configProperties.getTokenExpireTime(), configProperties.getTokenKey());
         return success("登录成功", new LoginResult(access_token, user));
     }

@@ -4,15 +4,7 @@
 
     <!-- 查询sql-->
     <sql id="selectSql">
-        SELECT a.user_id,
-        a.username,
-        a.nickname,
-        a.phone,
-        a.email,
-        a.create_time,
-        a.update_time,
-        a.last_login_time,
-        a.status
+        SELECT a.*
         FROM user_details a
         <where>
             <if test="param.userId != null">
@@ -67,15 +59,7 @@
 
     <!-- 根据角色查询相关用户-->
     <select id="selectByRoleId" resultType="com.entire.hotspotmap.system.main.entity.User">
-        SELECT a.user_id,
-               a.username,
-               a.nickname,
-               a.phone,
-               a.email,
-               a.create_time,
-               a.update_time,
-               a.last_login_time,
-               a.status
+        SELECT a.*
         FROM user_details a
         LEFT JOIN user_role b on a.user_id = b.user_id
         WHERE b.role_id = #{roleId}

@@ -9,7 +9,7 @@
         </foreach>
     </insert>
 
-    <select id="selectByUserId" resultType="com.entire.hotspotmap.system.main.entity.UserRole">
+    <select id="selectByUserId" resultType="com.entire.hotspotmap.system.main.entity.Role">
         SELECT *
         FROM role
         WHERE role_id IN
@@ -20,7 +20,7 @@
         )
     </select>
 
-    <select id="selectByUserIds" resultType="com.entire.hotspotmap.system.main.entity.UserRole">
+    <select id="selectByUserIds" resultType="com.entire.hotspotmap.system.main.entity.Role">
         SELECT a.user_id, b.*
         FROM user_role a
         LEFT JOIN role b ON a.role_id = b.role_id
