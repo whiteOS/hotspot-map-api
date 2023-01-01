@@ -1,6 +1,7 @@
 package com.entire.hotspotmap.system.main.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.entire.hotspotmap.system.main.entity.PersonalInfo;
 import com.entire.hotspotmap.system.main.entity.User;
 import com.entire.hotspotmap.system.main.param.UserParam;
 import com.entire.hotspotmap.system.main.web.PageResult;
@@ -73,4 +74,12 @@ public interface UserService extends IService<User>, UserDetailsService {
      * @return List<User>
      */
     List<User> selectByRoleId(Integer roleId);
+
+    /**
+     * 根据ID查询用户个人信息
+     *
+     * @param userId
+     * @return PersonalInfo
+     */
+    PersonalInfo selectPersonalInfo(Long userId);
 }

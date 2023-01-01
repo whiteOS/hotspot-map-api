@@ -1,12 +1,16 @@
 package com.entire.hotspotmap.system.utils;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.entire.hotspotmap.system.Constants;
 import com.entire.hotspotmap.system.main.web.ApiResult;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class CommonUtil {
     /**
@@ -49,5 +53,34 @@ public class CommonUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * List转为树形结构
+     *
+     * @param data           List
+     * @param parentId       顶级的parentId
+     * @param parentIdMapper 获取parentId的Function
+     * @param idMapper       获取id的Function
+     * @param consumer       赋值children的Consumer
+     * @param <T>            数据的类型
+     * @param <R>            parentId的类型
+     * @return List<T>
+     */
+    public static <T, R> List<T> toTreeData(List<T> data, R parentId,
+                                            Function<? super T, ? extends R> parentIdMapper,
+                                            Function<? super T, ? extends R> idMapper,
+                                            BiConsumer<T, List<T>> consumer) {
+        List<T> result = new ArrayList<>();
+        for (T d : data) {
+            R dParentId = parentIdMapper.apply(d);
+            if (ObjectUtil.equals(parentId, dParentId)) {
+                R dId = idMapper.apply(d);
+                List<T> children = toTreeData(data, dId, parentIdMapper, idMapper, consumer);
+                consumer.accept(d, children);
+                result.add(d);
+            }
+        }
+        return result;
     }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.entire.hotspotmap.system.exception.BusinessException;
+import com.entire.hotspotmap.system.main.entity.PersonalInfo;
 import com.entire.hotspotmap.system.main.entity.Role;
 import com.entire.hotspotmap.system.main.entity.User;
 import com.entire.hotspotmap.system.main.entity.UserRole;
@@ -69,9 +70,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User getByUsername(String username) {
-        if (username != null) {
-            return null;
-        }
         User user = baseMapper.selectByUsername(username);
         if (user != null) {
             user.setRoles(userRoleService.listByUserId(user.getUserId()));
@@ -164,6 +162,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public List<User> selectByRoleId(Integer roleId) {
         return baseMapper.selectByRoleId(roleId);
+    }
+
+    @Override
+    public PersonalInfo selectPersonalInfo(Long userId) {
+        return baseMapper.selectPersonalInfo(userId);
     }
 
     /**

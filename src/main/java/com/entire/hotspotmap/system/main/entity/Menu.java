@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Menu implements GrantedAuthority {
@@ -34,6 +35,9 @@ public class Menu implements GrantedAuthority {
     private Date createTime;
 
     private Date updateTime;
+
+    @TableField(exist = false)
+    private List<Menu> children;
 
     @TableField(exist = false)
     private Boolean checked;

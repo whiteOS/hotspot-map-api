@@ -65,4 +65,18 @@
         WHERE b.role_id = #{roleId}
     </select>
 
+    <!-- 查询用户个人信息-->
+    <select id="selectPersonalInfo" resultType="com.entire.hotspotmap.system.main.entity.PersonalInfo">
+        SELECT a.user_id,
+               a.username,
+               a.nickname,
+               a.phone,
+               a.email,
+               a.create_time,
+               a.expire_time,
+               a.last_login_time
+        FROM user_details a
+        WHERE a.user_id = #{userId}
+    </select>
+
 </mapper>

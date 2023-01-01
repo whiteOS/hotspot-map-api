@@ -2,13 +2,6 @@ package com.entire.hotspotmap.system.main.web;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-
-/**
- * 返回结果
- *
- * @author EleAdmin
- * @since 2017-06-10 10:10:50
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResult<T> {
 

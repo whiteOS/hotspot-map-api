@@ -2,6 +2,7 @@ package com.entire.hotspotmap.system.main.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.entire.hotspotmap.system.main.entity.PersonalInfo;
 import com.entire.hotspotmap.system.main.entity.User;
 import com.entire.hotspotmap.system.main.param.UserParam;
 import org.apache.ibatis.annotations.Param;
@@ -42,4 +43,12 @@ public interface UserMapper extends BaseMapper<User> {
      * @return User
      */
     List<User> selectByRoleId(@Param("roleId") Integer roleId);
+
+    /**
+     * 根据ID查询个人信息
+     *
+     * @param userId 用户ID
+     * @return PersonalInfo
+     */
+    PersonalInfo selectPersonalInfo(@Param("userId") Long userId);
 }
