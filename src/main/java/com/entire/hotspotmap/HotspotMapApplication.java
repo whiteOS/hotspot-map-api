@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties(ConfigProperties.class)
-@MapperScan("com.entire.hotspotmap.**.mapper")
+@MapperScan("com.entire.hotspotmap.mapper")
 public class HotspotMapApplication {
 
     public static void main(String[] args) {

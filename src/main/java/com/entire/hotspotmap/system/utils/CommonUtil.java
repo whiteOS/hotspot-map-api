@@ -2,7 +2,7 @@ package com.entire.hotspotmap.system.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.entire.hotspotmap.system.Constants;
-import com.entire.hotspotmap.system.main.web.ApiResult;
+import com.entire.hotspotmap.system.web.ApiResult;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

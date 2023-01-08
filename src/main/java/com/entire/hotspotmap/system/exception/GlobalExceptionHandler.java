@@ -2,7 +2,7 @@ package com.entire.hotspotmap.system.exception;
 
 import com.entire.hotspotmap.system.Constants;
 import com.entire.hotspotmap.system.utils.CommonUtil;
-import com.entire.hotspotmap.system.main.web.ApiResult;
+import com.entire.hotspotmap.system.web.ApiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;

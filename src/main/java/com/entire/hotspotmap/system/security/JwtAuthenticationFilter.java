@@ -3,9 +3,8 @@ package com.entire.hotspotmap.system.security;
 import cn.hutool.core.util.StrUtil;
 import com.entire.hotspotmap.system.Constants;
 import com.entire.hotspotmap.system.config.ConfigProperties;
-import com.entire.hotspotmap.system.main.entity.User;
-import com.entire.hotspotmap.system.main.entity.Menu;
-import com.entire.hotspotmap.system.main.service.UserService;
+import com.entire.hotspotmap.entity.User;
+import com.entire.hotspotmap.service.UserService;
 import com.entire.hotspotmap.system.utils.CommonUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -46,11 +45,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 if (user == null) {
                     throw new UsernameNotFoundException("Username not found");
                 }
-                //设置用户的数据权限
-                List<Menu> authorities = user.getAuthorities().stream()
-                        .filter(m -> StrUtil.isNotBlank(m.getAuthority())).collect(Collectors.toList());
+//                //设置用户的数据权限
+//                List<Menu> authorities = user.getAuthorities().stream()
+//                        .filter(m -> StrUtil.isNotBlank(m.getAuthority())).collect(Collectors.toList());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        user, null, authorities);
+                        user, null, null);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 // token将要过期签发新token, 防止突然退出登录
                 long expiration = (claims.getExpiration().getTime() - new Date().getTime()) / 1000 / 60;
